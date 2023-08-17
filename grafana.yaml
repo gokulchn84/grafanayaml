@@ -38,7 +38,7 @@ kind: Service
 metadata:
   name: grafana
 spec:
-  clusterIP: NodePort
+  type: NodePort
   selector:
     app: grafana
   ports:
