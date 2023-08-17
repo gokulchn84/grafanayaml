@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,22 +17,23 @@ spec:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                - arm64
-                - amd64
-              - key: kubernetes.io/os
-                operator: In
-                values:
-                - linux
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - arm64
+                      - amd64
+                  - key: kubernetes.io/os
+                    operator: In
+                    values:
+                      - linux
       containers:
-      - name: grafana
-        image: grafana/grafana:9.4.7
-        ports:
-        - name: web
-          containerPort: 3000
+        - name: grafana
+          image: grafana/grafana:9.4.7
+          ports:
+            - name: web
+              containerPort: 3000
+
 ---
 apiVersion: v1
 kind: Service
@@ -42,5 +44,5 @@ spec:
   selector:
     app: grafana
   ports:
-  - name: web
-    port: 3000
+    - name: web
+      port: 3000
